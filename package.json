@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./index.ts"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,17 @@
     "url": "https://github.com/kamit1983/parser/issues"
   },
   "homepage": "https://github.com/kamit1983/parser#readme",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "elasticsearch": "^12.0.1",
+    "kafka-node": "^1.0.5",
+    "node-storage": "0.0.7",
+    "winston": "^2.3.0"
+  },
   "devDependencies": {
     "@types/node": "^6.0.47",
+    "nodemon": "^1.11.0",
+    "ts-node": "^1.7.0",
     "typescript": "^2.0.9"
   }
 }
