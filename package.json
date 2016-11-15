@@ -1,0 +1,24 @@
+{
+  "name": "parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamit1983/parser.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kamit1983/parser/issues"
+  },
+  "homepage": "https://github.com/kamit1983/parser#readme",
+  "devDependencies": {
+    "@types/node": "^6.0.47",
+    "typescript": "^2.0.9"
+  }
+}
