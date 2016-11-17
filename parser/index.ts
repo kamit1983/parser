@@ -13,7 +13,7 @@ class Parser extends EventEmitter {
   parse(config: ParserConfig[]){
     this.config = config;
     for(let item of config){
-      let storeVal = 0;
+      let storeVal = item.readFromLastOffset ? (storeInstance.get(item.topic) || 0) : item.offset;
       storeVal = item.offset;
       this.kafkaConfig.push({
           topic: item.topic,
@@ -47,21 +47,16 @@ class Parser extends EventEmitter {
   parseHTML(config,$) {
     let self = this;
     let doc = {};
-    // Object.keys(self.options.source[name].parser).map(function(key) {
-    //   doc[key] = self.options.source[name].parser[key];
-    //   if(self.options.source[name].parser[key].method === 'html') {
-    //     doc[key] = $(self.options.source[name].parser[key].html).html() || "";
-    //   }
-    //   else if(self.options.source[name].parser[key].method === 'val') {
-    //     doc[key] = $(self.options.source[name].parser[key].html).val() || "";
-    //   }
-    //   else if(self.options.source[name].parser[key].method.split("=").indexOf('attr') !== -1) {
-    //     doc[key] = $(self.options.source[name].parser[key].html).attr(self.options.source[name].parser[key].method.split("=")[1]) || "";
-    //   }
-    //   else {
-    //     doc = null;
-    //   }
-    // });
+    for(let parser of config.parsers ){
+      let key = parser.name;
+      doc[key] = parser[key];
+      if(parser[key].method === 'html') {
+        doc[key] = $(parser[key].html).html() || "";
+      }
+      else {
+        doc = null;
+      }
+    }
     return doc;
   }
 
@@ -76,6 +71,12 @@ interface ParserConfig{
   partition: number;
   offset: number;
   readFromLastOffset: boolean;
+  parsers: ParserItem[];
+}
+interface ParserItem{
+  name: string;
+  selector: string;
+  method: string;
 }
 
-export {Parser, ParserConfig};
+export {Parser, ParserConfig, ParserItem};
