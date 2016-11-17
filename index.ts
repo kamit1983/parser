@@ -9,3 +9,26 @@ let parseConfig: [ParserConfig] = [{
   readFromLastOffset: false
 }];
 parser.parse(parseConfig);
+
+
+parser.on('message',function(config,$) {
+  let parseData = parser.parseHTML(config,$);
+  //indexer.index(topic,html,parseData);
+});
+
+// parser.on('error',function(topic,error) {
+//   console.log(topic);
+//   console.log(error);
+// });
+//
+// parser.on('offsetOutOfRange',function(error) {
+//   console.log(error);
+// });
+
+// indexer.on('error',function(error) {
+//   console.log(error);
+// });
+//
+// indexer.on('success',function() {
+//   console.log("indexed");
+// });
