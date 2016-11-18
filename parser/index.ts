@@ -32,7 +32,7 @@ class Parser extends EventEmitter {
         storeInstance.put(config.topic,message.offset);
         let html = JSON.parse(message.value);
         let $ = cheerio.load(html.doc);
-        self.emit('message',config,$);
+        self.emit('message',config, html,$);
       });
       consumer.on('error',function(error) {
         self.emit('error',config.topic,error);
